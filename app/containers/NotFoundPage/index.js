@@ -10,16 +10,27 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { withApollo } from 'react-apollo';
+import ApolloClient from 'apollo-client';
 
-import messages from './messages';
-
-export default class NotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class NotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    console.log('MOUNTING GRAPHQL FREE ROUTE');
+    console.log('Listing queries, should be empty?');
+    console.log('Observable quereies', this.props.client.queryManager.observableQueries);
+  }
   render() {
     return (
       <h1>
-        <FormattedMessage {...messages.header} />
+        BOOM. MyQuery from previous route is still in apollo-client. (check dev tools)
+        <br />
+        <small>See console output</small>
       </h1>
     );
   }
 }
+NotFound.propTypes = {
+  client: React.PropTypes.instanceOf(ApolloClient).isRequired,
+};
+
+export default withApollo(NotFound);

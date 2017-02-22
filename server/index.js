@@ -26,6 +26,8 @@ const prettyHost = customHost || 'localhost';
 
 const port = argv.port || process.env.PORT || 3000;
 
+app.post('/graphql', (req, res) => res.status(401).end());
+
 // Start your app.
 app.listen(port, host, (err) => {
   if (err) {

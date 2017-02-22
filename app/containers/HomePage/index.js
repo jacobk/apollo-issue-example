@@ -11,9 +11,15 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import messages from './messages';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentWillUnmount() {
+    console.log('WILL UNMOUNT GRAPHQL WRAPPED COMPONENT');
+  }
+
   render() {
     return (
       <h1>
@@ -22,3 +28,16 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     );
   }
 }
+
+
+const MyQuery = gql`query MyQuery
+  {
+    me {
+      email
+    }
+  }
+`;
+
+const GraphqlHomePage = graphql(MyQuery)(HomePage);
+
+export default GraphqlHomePage;

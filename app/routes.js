@@ -34,7 +34,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '*',
+      path: '/nographql',
       name: 'notfound',
       getComponent(nextState, cb) {
         import('containers/NotFoundPage')
